@@ -1,0 +1,20 @@
+import sqlite3
+
+# Connect to SQLite
+conn = sqlite3.connect("sales_data.db")
+cursor = conn.cursor()
+
+# Create sales table
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS sales (
+        Date TEXT,
+        Product TEXT,
+        Sales INTEGER,
+        Revenue INTEGER
+    )
+""")
+
+# Insert data from CSV
+df.to_sql("sales", conn, if_exists="replace", index=False)
+conn.commit()
+conn.close()
